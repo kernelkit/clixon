@@ -275,20 +275,22 @@ xml_dump1(FILE  *f,
     
     if (xml_type(x) != CX_ELMNT)
         return 0;
-    fprintf(stderr, "%*s %s(%s)",
+    if (f == NULL)
+	    f = stderr;
+    fprintf(f, "%*s %s(%s)",
             indent*3, "",
             //      x,
             xml_name(x),
             xml_type2str(xml_type(x)));
     if (xml_flag(x, XML_FLAG_ADD))
-        fprintf(stderr, " add");
+        fprintf(f, " add");
     if (xml_flag(x, XML_FLAG_DEL))
-        fprintf(stderr, " delete");
+        fprintf(f, " delete");
     if (xml_flag(x, XML_FLAG_CHANGE))
-        fprintf(stderr, " change");
+        fprintf(f, " change");
     if (xml_flag(x, XML_FLAG_MARK))
-        fprintf(stderr, " mark");
-    fprintf(stderr, "\n");
+        fprintf(f, " mark");
+    fprintf(f, "\n");
     xc = NULL;
     while ((xc = xml_child_each(x, xc, -1)) != NULL) {
         xml_dump1(f, xc, indent+1);
