@@ -794,7 +794,7 @@ main(int    argc,
      * Alterntaive is to add "preference" keyword in the CLIgen syntax that overrides this.
      * Note there may be terminal tiebreaks liuke this which would motivate a setting to "3"?
      */
-    cligen_preference_mode_set(cli_cligen(h), 2);
+    cligen_preference_mode_set(cli_cligen(h), 1);	/* kkit w/a issue #334 */
 
     /* Call start function in all plugins before we go interactive 
      */
